@@ -594,6 +594,167 @@ Nah untuk mencobanya, mari kita akan mencoba untuk melakukan hal berikut:
    };
    ```
 
-1.
+1. Save, dan kemudian lihat, apakah imagenya sudah _nongol_? Ya ! Imagenya sekarang sudah _nongol_ di dalam Aplikasi kita, keren sekali bukan?
+
+Selanjutnya kita akan mencoba untuk melihat Component utama yang terakhir yang sangat kita butuhkan: `ScrollView` dan `FlatList`
 
 ### RN Component - ScrollView vs FlatList
+
+`ScrollView` dapat kita lihat dokumentasinya di sini:
+
+- https://reactnative.dev/docs/scrollview
+
+Wah kalau baca dari dokumentasinya ini cukup panjang yah?
+
+Tapi sebenarnyanya inti dari ScrollView ini adalah:
+
+> View yang bisa di-scroll (geser atas bawah) dan akan me-render SELURUH child componentnya SEKALIGUS
+
+Component ini terdengar keren sekali bukan?
+
+Tapi Component ini ada kelemahannya. `SELURUH child componentnya akan di-render SEKALIGUS`.
+
+Bayangkan bila kita di dalam `ScrollView` ini memiliki `Card` yang berjumlah > 1000, dan seluruhnya akan di-render **SEKALIGUS**, wah pastinya asik sekali bukan **menunggu** render-nya selesai? (TL;DR - **VERY BAD PERFORMANCE**)
+
+Di sinilah `FlatList` _comes to the rescue_
+
+`FlatList` adalah sebuah Component yang akan me-render Item yang ada di dalamnya secara malas (`Lazy`), di-render ketika Itemnya akan tiba saatnya muncul, dan meng-"hapus" Itemnya yang discroll keluar dari screen untuk menghemat memory dan waktu proses. Wah seru yah kalau pakai `FlatList`
+
+Mari kita coba menggunakan `FlatList` untuk me-render Component yang cukup banyak yah !
+
+1. Modifikasi kode pada `App.jsx` pada bagian StyleSheet menjadi seperti berikut:
+
+   ```jsx
+   const styles = StyleSheet.create({
+     /* Yang ini tidak digunakan lagi yah */
+     // container: {
+     //   flex: 1,
+     //   backgroundColor: "#fff",
+     //   alignItems: "center",
+     //   justifyContent: "center",
+     // },
+
+     /* Kita mulai membuat custom style kita dari sini */
+     customContainer: {
+       flex: 1,
+       padding: 20,
+       minHeight: "90%",
+     },
+     greenBox: {
+       flex: 1,
+       backgroundColor: "darkgreen",
+       padding: 20,
+       flexDirection: "row",
+       minWidth: "100%",
+     },
+     redBox: {
+       flex: 1,
+       backgroundColor: "red",
+     },
+     blueBox: {
+       flex: 1,
+       backgroundColor: "blue",
+     },
+     orangeBox: {
+       flex: 1,
+       backgroundColor: "orange",
+     },
+     purpleBox: {
+       flex: 2,
+       backgroundColor: "purple",
+     },
+     imageLogo: {
+       height: 80,
+       width: 80,
+     },
+     // Style Tambahan untuk List Item
+     listButton: {
+       padding: 8,
+       marginVertical: 8,
+       marginHorizontal: 16,
+       backgroundColor: "aquamarine",
+       borderRadius: 8,
+     },
+     listText: {
+       fontSize: 24,
+     },
+   });
+   ```
+
+1. Modifikasi kode pada `App.jsx` untuk menambahkan `ThirdPage` menjadi seperti berikut
+
+   ```jsx
+   const ThirdPage = () => {
+     // State yang akan berisi data tarikan dari eksternal
+     const [data, setData] = useState("");
+
+     // Standard useEffet untuk menarik data
+     useEffect(
+       () => {
+         // IIFE untuk fetch data
+         (async () => {
+           const response = await fetch(
+             "https://jsonplaceholder.typicode.com/todos"
+           );
+           const responseJson = await response.json();
+
+           setData(responseJson);
+         })();
+       },
+       // Deps list array kosong untuk tarik data 1x saja
+       []
+     );
+
+     // Ini adalah fungsi yang akan menerima sebuah Object,
+     // dimana salah satu propsnya bernama item
+     const renderItem = ({ item }) => {
+       // Kita akan render Item yang didapatkan di sini
+       return (
+         // Di sini kita akan mencoba untuk menggunakan TouchableOpacity
+         // (Karena Button susah untuk di-styling)
+         <TouchableOpacity
+           style={styles.listButton}
+           onPress={(event) => {
+             console.log(item.id);
+           }}
+         >
+           <Text style={styles.listText}>{item.title}</Text>
+         </TouchableOpacity>
+       );
+     };
+
+     return (
+       // Di sini kita akan mencoba menggunakan FlatList
+       // harus ada required attributes:
+       // - data = data yang akan diterima
+       // - renderItem = Function Component yang akan dirender untuk setiap datum yang ditemukan
+       <FlatList
+         data={data}
+         renderItem={renderItem}
+         keyExtractor={(item) => item.id}
+       />
+     );
+   };
+   ```
+
+1. Jangan lupa untuk menambahkan import `FlatList` dan `TouchableOpacity` dari `react-native` yah
+
+1. Kemudian kita akan memodifikasi kode pada `App.jsx` lagi pada component `App` untuk menggunakan `ThirdPage`
+
+   ```jsx
+   export default function App() {
+     return (
+       <SafeAreaProvider>
+         <SafeAreaViewCtx>
+           <ThirdPage />
+         </SafeAreaViewCtx>
+       </SafeAreaProvider>
+     );
+   }
+   ```
+
+1. Simpan seluruh modifikasi kode yang ada, kemudian coba untuk menjalankan kodenya.
+
+Sampai di sini seharusnya `FlatList` kita akan muncul dan menampilkan data dari `JSONPlaceholder` dalam bentuk `TouchableOpacity`, yang mana ketika tombolnya ditekan, akan bisa memunculkan log berupa ID dari barang yang ditekan.
+
+Selamat belajar !
