@@ -2,18 +2,20 @@
 
 ## Table of Content
 
-- [Disclaimer](#dislaimer)
-- [Requirements](#Requirements)
-- [Apa itu React Native](#apa-itu-react-native)
-- [React Native - Manual vs Framework](#react-native---manual-vs-framework)
-- [RN Framework - Expo](#rn-framework---expo)
-- [Let's Demo](#lets-demo)
-  - [Create RN Project via Expo](#create-rn-project-via-expo)
-  - [RN Project - Struktur Folder](#rn-project---struktur-folder)
-  - [RN Component](#rn-component)
-  - [RN Styling - Flex](#rn-styling---flex)
-  - [RN Component - Image](#rn-component---image)
-  - [RN Component - ScrollView vs FlatList](#rn-component---scrollview-vs-flatlist)
+- [Education React Native with Expo](#education-react-native-with-expo)
+  - [Table of Content](#table-of-content)
+  - [Disclaimer](#disclaimer)
+  - [Requirements](#requirements)
+  - [Apa itu React Native?](#apa-itu-react-native)
+  - [React Native - Manual vs Framework](#react-native---manual-vs-framework)
+  - [RN Framework - Expo](#rn-framework---expo)
+  - [Let's Demo](#lets-demo)
+    - [Create RN Project via Expo](#create-rn-project-via-expo)
+    - [RN Project - Struktur Folder](#rn-project---struktur-folder)
+    - [RN Component](#rn-component)
+    - [RN Styling - Flex](#rn-styling---flex)
+    - [RN Component - Image](#rn-component---image)
+    - [RN Component - ScrollView vs FlatList](#rn-component---scrollview-vs-flatlist)
 
 ## Disclaimer
 
@@ -27,7 +29,7 @@
 
 ## Apa itu React Native?
 
-- https://reactnative.dev/
+- [https://reactnative.dev/](https://reactnative.dev)
 
 `Belajarnya Sekali, Nulisnya dimana mana !` adalah jargon dari `React Native` ini.
 
@@ -86,18 +88,18 @@ Intinya bila menggunakan "Full Expo", maka kita bisa:
 
 Karena kita ingin mendevelop dan ingin bisa mempublikasi dengan cepat, maka kita akan mencoba develop aplikasi Mobile via Expo pada pembelajaran kali ini !
 
-- https://expo.dev/
-- https://docs.expo.dev/archive/managed-vs-bare/
+- [https://expo.dev/](https://expo.dev)
+- [https://docs.expo.dev/archive/managed-vs-bare/](https://docs.expo.dev/archive/managed-vs-bare/)
 
 Disclaimer:
 
-- Ingat bahwa kita menggunakan Managed Workflow (`Full Expo`) sehingga akan ada limitasi yang didapatkan (https://docs.expo.dev/faq/#limitations)
+- Ingat bahwa kita menggunakan Managed Workflow (`Full Expo`) sehingga akan ada limitasi yang didapatkan ([https://docs.expo.dev/faq/#limitations](https://docs.expo.dev/faq/#limitations))
 
 ## Let's Demo
 
 Tanpa ba bi bu lagi, mari sekarang kita mencoba untuk langsung membuat aplikasi sederhana dengan menggunakan Expo yah !
 
-```
+```plaintext
 SANGAT DISARANKAN UNTUK MENGGUNAKAN NPM, JANGAN MENGGUNAKAN YARN / PNPM APABILA TIDAK INGIN REPOT AKAN KONFIGURASI TAMBAHAN !
 ```
 
@@ -112,7 +114,7 @@ Untuk membuat Project dengan Expo, Langkah-langkahnya adalah sebagai berikut:
    # Apabila ingin langsung membuat di folder, gunakan perintah
    # npx create-expo-app .
 
-   npx create-expo-app nama-project-untuk-react-native
+   npx create-expo-app nama-project-untuk-react-native --template blank
    ```
 
 1. Menunggu sebentar hingga template berhasil di clone, dan package selesai terinstall
@@ -131,7 +133,7 @@ Untuk membuat Project dengan Expo, Langkah-langkahnya adalah sebagai berikut:
 
 Sebelum kita mendevelop aplikasi lebih lanjut, mari kita melihat terlebih dahulu struktur folder template yang diberikan:
 
-```
+```plaintext
 > root-folder-project
   > .expo <-- berisi file khusus untuk expo, tidak perlu diutak-atik
   > assets <-- berisi assets yang dibutuhkan dalam project (gambar, etc)
